@@ -22,7 +22,7 @@ function varargout = DetectionGUI(varargin)
 
 % Edit the above text to modify the response to help DetectionGUI
 
-% Last Modified by GUIDE v2.5 31-Oct-2023 12:12:15
+% Last Modified by GUIDE v2.5 24-Nov-2023 21:58:01
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -144,13 +144,31 @@ set(handles.EarlyLickTimeOutTag,'Enable','off');
 %% Auditory stimulus parameters
 set(handles.ToneDurationTag,'String','10'); handles.aud_stim_duration = str2double(get(handles.ToneDurationTag,'String'));
 set(handles.ToneDurationTag,'Enable','on');
-set(handles.ToneAmpTag,'String','10'); handles.aud_stim_amp = str2double(get(handles.ToneAmpTag,'String'));
-set(handles.ToneAmpTag,'Enable','on');
 set(handles.ToneFreqTag,'String','10000'); handles.aud_stim_freq= str2double(get(handles.ToneFreqTag,'String'));
 set(handles.ToneFreqTag,'Enable','on');
 
-set(handles.AStimWeightTag,'Enable','on')
-set(handles.AStimWeightTag,'String','10'); handles.aud_stim_weight = str2double(get(handles.AStimWeightTag,'String'));
+set(handles.ToneAmp1Tag,'String','10'); handles.aud_stim_amp_1 = str2double(get(handles.ToneAmp1Tag,'String'));
+set(handles.AStimWeight1Tag,'String','10'); handles.aud_stim_weight_1 = str2double(get(handles.AStimWeight1Tag,'String'));
+set(handles.ToneAmp1Tag,'Enable','on');
+set(handles.AStimWeight1Tag,'Enable','on');
+
+%  For additional auditory stimulis of different amplitudes
+set(handles.AStimAmpRangeCheckbox,'Value',0); handles.aud_stim_amp_range = get(handles.AStimAmpRangeCheckbox,'Value');
+
+set(handles.ToneAmp2Tag,'String','10'); handles.aud_stim_amp_2 = str2double(get(handles.ToneAmp2Tag,'String'));
+set(handles.AStimWeight2Tag,'String','10'); handles.aud_stim_weight_2 = str2double(get(handles.AStimWeight2Tag,'String'));
+set(handles.ToneAmp2Tag,'Enable','off');
+set(handles.AStimWeight2Tag,'Enable','off');
+
+set(handles.ToneAmp3Tag,'String','10'); handles.aud_stim_amp_3 = str2double(get(handles.ToneAmp3Tag,'String'));
+set(handles.AStimWeight3Tag,'String','10'); handles.aud_stim_weight_3 = str2double(get(handles.AStimWeight3Tag,'String'));
+set(handles.ToneAmp3Tag,'Enable','off');
+set(handles.AStimWeight3Tag,'Enable','off');
+
+set(handles.ToneAmp4Tag,'String','10'); handles.aud_stim_amp_4 = str2double(get(handles.ToneAmp4Tag,'String'));
+set(handles.AStimWeight4Tag,'String','10'); handles.aud_stim_weight_4 = str2double(get(handles.AStimWeight4Tag,'String'));
+set(handles.ToneAmp4Tag,'Enable','off');
+set(handles.AStimWeight4Tag,'Enable','off');
 
 set(handles.BckgNoiseFolderPath,'String','Enter path'); handles.bckg_noise_directory = get(handles.BckgNoiseFolderPath,'String');
 set(handles.BckgNoiseFolderPath,'Enable','off');
@@ -1116,19 +1134,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+% ToneAmpXFunctions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-function ToneAmpTag_Callback(hObject, eventdata, handles)
-% hObject    handle to ToneAmpTag (see GCBO)
+function ToneAmp1Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to ToneAmp1Tag (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of ToneAmpTag as text
-%        str2double(get(hObject,'String')) returns contents of ToneAmpTag as a double
+% Hints: get(hObject,'String') returns contents of ToneAmp1Tag as text
+%        str2double(get(hObject,'String')) returns contents of ToneAmp1Tag as a double
 global handles2give
 
-handles.aud_stim_amp = round(str2double(get(handles.ToneAmpTag,'String'))*100)/100;
-set(handles.ToneAmpTag,'String',num2str(handles.aud_stim_amp));
+handles.aud_stim_amp_1 = round(str2double(get(handles.ToneAmp1Tag,'String'))*100)/100;
+set(handles.ToneAmp1Tag,'String',num2str(handles.aud_stim_amp_1));
 
 % Update handles structure
 handles2give= handles;
@@ -1136,8 +1154,8 @@ guidata(hObject, handles);
 
 
 % --- Executes during object creation, after setting all properties.
-function ToneAmpTag_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to ToneAmpTag (see GCBO)
+function ToneAmp1Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ToneAmp1Tag (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -1146,6 +1164,101 @@ function ToneAmpTag_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function ToneAmp2Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to ToneAmp2Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of ToneAmp2Tag as text
+%        str2double(get(hObject,'String')) returns contents of ToneAmp2Tag as a double
+global handles2give
+
+handles.aud_stim_amp_2 = round(str2double(get(handles.ToneAmp2Tag,'String'))*100)/100;
+set(handles.ToneAmp2Tag,'String',num2str(handles.aud_stim_amp_2));
+
+% Update handles structure
+handles2give= handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function ToneAmp2Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ToneAmp2Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function ToneAmp3Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to ToneAmp3Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of ToneAmp3Tag as text
+%        str2double(get(hObject,'String')) returns contents of ToneAmp3Tag as a double
+global handles2give
+
+handles.aud_stim_amp_3 = round(str2double(get(handles.ToneAmp3Tag,'String'))*100)/100;
+set(handles.ToneAmp3Tag,'String',num2str(handles.aud_stim_amp_3));
+
+% Update handles structure
+handles2give= handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function ToneAmp3Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ToneAmp3Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function ToneAmp4Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to ToneAmp4Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of ToneAmp4Tag as text
+%        str2double(get(hObject,'String')) returns contents of ToneAmp4Tag as a double
+global handles2give
+
+handles.aud_stim_amp_4 = round(str2double(get(handles.ToneAmp4Tag,'String'))*100)/100;
+set(handles.ToneAmp4Tag,'String',num2str(handles.aud_stim_amp_4));
+
+% Update handles structure
+handles2give= handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function ToneAmp4Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ToneAmp4Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -1766,36 +1879,20 @@ function MappingCheckbox_Callback(hObject, eventdata, handles)
 
 handles.MappingFlag = get(handles.MappingCheckbox,'Value');
 
+% AStimWeightXTagFunctions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-function AStimWeightTag_Callback(hObject, eventdata, handles)
-% hObject    handle to AStimWeightTag (see GCBO)
+function AStimWeight1Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to AStimWeight1Tag (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of AStimWeightTag as text
-%        str2double(get(hObject,'String')) returns contents of AStimWeightTag as a double
+% Hints: get(hObject,'String') returns contents of AStimWeight1Tag as text
+%        str2double(get(hObject,'String')) returns contents of AStimWeight1Tag as a double
 
 global handles2give
 
-handles.aud_stim_weight = round(str2double(get(handles.AStimWeightTag,'String')));
-set(handles.AStimWeightTag,'String',num2str(handles.aud_stim_weight));
-
-
-if handles.aud_stim_weight > 0
-    
-    set(handles.ToneDurationTag,'Enable','on');
-    set(handles.ToneAmpTag,'Enable','on');
-    set(handles.ToneFreqTag,'Enable','on');
-    set(handles.AudRewTag,'Enable','on');
-    
-else 
-    
-    set(handles.ToneDurationTag,'Enable','off');
-    set(handles.ToneAmpTag,'Enable','off');
-    set(handles.ToneFreqTag,'Enable','off');
-    set(handles.AudRewTag,'Enable','off');
-end
+handles.aud_stim_weight_1 = round(str2double(get(handles.AStimWeight1Tag,'String')));
+set(handles.AStimWeight1Tag,'String',num2str(handles.aud_stim_weight_1));
     
 
 % Update handles structure
@@ -1803,10 +1900,9 @@ handles2give=handles;
 guidata(hObject, handles);
 
 
-
 % --- Executes during object creation, after setting all properties.
-function AStimWeightTag_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to AStimWeightTag (see GCBO)
+function AStimWeight1Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to AStimWeight1Tag (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -1815,6 +1911,107 @@ function AStimWeightTag_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function AStimWeight2Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to AStimWeight2Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of AStimWeight2Tag as text
+%        str2double(get(hObject,'String')) returns contents of AStimWeight2Tag as a double
+
+global handles2give
+
+handles.aud_stim_weight_2 = round(str2double(get(handles.AStimWeight2Tag,'String')));
+set(handles.AStimWeight2Tag,'String',num2str(handles.aud_stim_weight_2));
+    
+
+% Update handles structure
+handles2give=handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function AStimWeight2Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to AStimWeight2Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function AStimWeight3Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to AStimWeight3Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of AStimWeight3Tag as text
+%        str2double(get(hObject,'String')) returns contents of AStimWeight3Tag as a double
+
+global handles2give
+
+handles.aud_stim_weight_3 = round(str2double(get(handles.AStimWeight3Tag,'String')));
+set(handles.AStimWeight3Tag,'String',num2str(handles.aud_stim_weight_3));
+    
+
+% Update handles structure
+handles2give=handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function AStimWeight3Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to AStimWeight3Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function AStimWeight4Tag_Callback(hObject, eventdata, handles)
+% hObject    handle to AStimWeight4Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of AStimWeight4Tag as text
+%        str2double(get(hObject,'String')) returns contents of AStimWeight4Tag as a double
+
+global handles2give
+
+handles.aud_stim_weight_4 = round(str2double(get(handles.AStimWeight4Tag,'String')));
+set(handles.AStimWeight4Tag,'String',num2str(handles.aud_stim_weight_4));
+    
+
+% Update handles structure
+handles2give=handles;
+guidata(hObject, handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function AStimWeight4Tag_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to AStimWeight4Tag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % --- Executes on button press in AudRewTag.
@@ -2449,6 +2646,40 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+% --- Executes on button press in AStimAmpRangeCheckbox.
+function AStimAmpRangeCheckbox_Callback(hObject, eventdata, handles)
+% hObject    handle to AStimAmpRangeCheckbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of AStimAmpRangeCheckbox
+global handles2give
+
+handles.aud_stim_amp_range = get(handles.AStimAmpRangeCheckbox,'Value');
+if handles.aud_stim_amp_range
+    set(handles.ToneAmp2Tag,'Enable','on');
+    set(handles.AStimWeight2Tag,'Enable','on');
+    set(handles.ToneAmp3Tag,'Enable','on');
+    set(handles.AStimWeight3Tag,'Enable','on');
+    set(handles.ToneAmp4Tag,'Enable','on');
+    set(handles.AStimWeight4Tag,'Enable','on');
+else
+    set(handles.ToneAmp2Tag,'Enable','off');
+    set(handles.AStimWeight2Tag,'Enable','off');
+    set(handles.AStimWeight2Tag,'String','0'); handles.aud_stim_weight_2 = str2double(get(handles.AStimWeight2Tag,'String'));
+    set(handles.ToneAmp3Tag,'Enable','off');
+    set(handles.AStimWeight3Tag,'Enable','off');
+    set(handles.AStimWeight3Tag,'String','0'); handles.aud_stim_weight_3 = str2double(get(handles.AStimWeight3Tag,'String'));
+    set(handles.ToneAmp4Tag,'Enable','off');
+    set(handles.AStimWeight4Tag,'Enable','off');
+    set(handles.AStimWeight4Tag,'String','0'); handles.aud_stim_weight_4 = str2double(get(handles.AStimWeight4Tag,'String'));
+end
+
+% Update handles structure
+handles2give=handles;
+guidata(hObject, handles);
+
+
 % --- Executes on button press in StimAmpRangeCheckbox.
 function StimAmpRangeCheckbox_Callback(hObject, eventdata, handles)
 % hObject    handle to StimAmpRangeCheckbox (see GCBO)
@@ -2569,3 +2800,4 @@ function BehaviourTypemenu_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+

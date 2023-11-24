@@ -81,7 +81,7 @@ function update_parameters
     early_lick_timeout=handles2give.early_lick_timeout; % in ms
 
     % Stimuli parameters
-    aud_stim_amp =  handles2give.aud_stim_amp;
+    aud_stim_amp =  handles2give.aud_stim_amp_1; % default amplitude, overwritten at stim. definition
     aud_stim_duration = handles2give.aud_stim_duration;
     aud_stim_freq = handles2give.aud_stim_freq;
     
@@ -89,7 +89,7 @@ function update_parameters
     wh_stim_duration = handles2give.wh_stim_duration;
     wh_scaling_factor = handles2give.wh_scaling_factor;
 
-    aud_stim_weight = handles2give.aud_stim_weight;
+    aud_stim_weight = get_auditory_weight(handles2give);
     wh_stim_weight = get_whisker_weight(handles2give);
     no_stim_weight = handles2give.no_stim_weight;
     
@@ -399,7 +399,8 @@ function update_parameters
     else
         % Sinusoidal auditory stimulus
         if is_auditory
-
+            
+            aud_stim_amp = get_auditory_stim_amp(handles2give);
             aud_vec = aud_stim_amp*[zeros(1,(baseline_window)*Stim_S_SR/1000)...
                 sin(linspace(0, aud_stim_duration* aud_stim_freq*2*pi/1000, round(aud_stim_duration*Stim_S_SR/1000))) 0];
             aud_vec=[aud_vec zeros(1,trial_duration*Stim_S_SR/1000-length(aud_vec))];
