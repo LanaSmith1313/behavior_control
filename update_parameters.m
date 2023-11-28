@@ -400,7 +400,7 @@ function update_parameters
         % Sinusoidal auditory stimulus
         if is_auditory
             
-            aud_stim_amp = get_auditory_stim_amp(handles2give);
+            aud_stim_amp = get_auditory_stim_amp_uniform(handles2give);
             aud_vec = aud_stim_amp*[zeros(1,(baseline_window)*Stim_S_SR/1000)...
                 sin(linspace(0, aud_stim_duration* aud_stim_freq*2*pi/1000, round(aud_stim_duration*Stim_S_SR/1000))) 0];
             aud_vec=[aud_vec zeros(1,trial_duration*Stim_S_SR/1000-length(aud_vec))];
@@ -428,7 +428,7 @@ function update_parameters
             impulse_down = impulse_down(2:end);
             impulse = [impulse_up' wh_scaling_factor*impulse_down'];
             
-            wh_stim_amp = get_whisker_stim_amp(handles2give); 
+            wh_stim_amp = get_whisker_stim_amp_uniform(handles2give); 
             wh_vec = wh_stim_amp * [zeros(1,baseline_window*Stim_S_SR/1000) impulse];
             wh_vec = [wh_vec zeros(1,trial_duration*Stim_S_SR/1000 - numel(wh_vec))];
 
